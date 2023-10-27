@@ -14,10 +14,3 @@ func exists(path string) bool {
 	}
 	return true
 }
-
-func openFile(name string, flag int, perm os.FileMode) (*os.File, error) {
-	if !exists(name) {
-		return os.Create(name)
-	}
-	return os.OpenFile(name, flag, perm)
-}
