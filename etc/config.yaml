@@ -1,0 +1,12 @@
+bot:
+  token: "1033630883:AAGPqZHE25Z6TJDlMqq1eFy01E3gmWbInqk"
+  endpoint: "https://telegram.api.mystery0.app/bot%s/%s"
+
+log:
+  home: "logs"
+  file: "publisher.log"
+  color: true
+  local: true
+
+publisher:
+  type: "log"
