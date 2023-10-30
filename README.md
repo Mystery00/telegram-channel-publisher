@@ -4,7 +4,15 @@
 
 ## 使用方法
 
-TODO
+```shell
+docker run -it --rm \
+    -e CONFIG_HOME=/app/etc \
+    -v /path/to/config.yaml:/app/etc/config.yaml \
+    mystery0/telegram-channel-publisher:20231030-0b40
+```
+> 备注：后面会把版本号改成数字的形式，而不是现在这个格式
+
+环境变量是指定服务使用的配置文件的目录，配置文件的名称必须是`config.yaml`，如果运行时找不到配置文件，会报错退出。
 
 ## 配置文件
 
@@ -40,7 +48,15 @@ halo:
 ```
 
 ### 创建Halo的token
+
 ![创建halotoken](img/create-halo-token.png)
 
+创建令牌的时候，需要授予的权限如下：
+- 附件查看：查询附件的信息以获取图片地址
+- 附件管理：上传图片需要这个权限
+- 瞬间管理：发布瞬间需要这个权限
+- 瞬间查看：瞬间管理会默认授予这个权限
+
 ### 获取Halo的图片存储策略
-TODO
+
+![获取policy](img/get_policy.png)
