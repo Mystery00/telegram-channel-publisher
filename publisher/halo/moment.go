@@ -2,6 +2,7 @@ package halo
 
 import (
 	"bytes"
+	"fmt"
 	"net/http"
 	"text/template"
 	"time"
@@ -9,10 +10,12 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+const templateDir = "/app/templates"
+
 func NewMoment(m Moment) {
-	tplPath := "templates/halo-text.tpl"
+	tplPath := fmt.Sprintf("%s/halo-text.tpl", templateDir)
 	if m.ImageURL != "" {
-		tplPath = "templates/halo-image.tpl"
+		tplPath = fmt.Sprintf("%s/halo-image.tpl", templateDir)
 	}
 	t := template.Must(template.ParseGlob(tplPath))
 	var tmplBytes bytes.Buffer

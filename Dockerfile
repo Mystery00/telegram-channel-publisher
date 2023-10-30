@@ -12,3 +12,4 @@ RUN apt install --reinstall ca-certificates -y
 WORKDIR /app
 ENTRYPOINT ["/usr/bin/telegram-channel-publisher"]
 COPY --from=builder /usr/bin/telegram-channel-publisher /usr/bin/
+COPY templates /app/templates
