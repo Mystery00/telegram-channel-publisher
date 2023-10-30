@@ -1,10 +1,19 @@
 package channel
 
 import (
-	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/sirupsen/logrus"
+	"fmt"
+	"strings"
+	"telegram-channel-publisher/config"
 	"telegram-channel-publisher/model"
 	"telegram-channel-publisher/publisher"
+
+	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
+)
+
+var (
+	apiEndpoint = viper.GetString(config.ApiEndpoint)
 )
 
 func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
@@ -53,7 +62,17 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 				//其他类型消息，跳过
 				continue
 			}
-			publisher.Pub(post)
+			//替换图片地址
+			if len(post.ImageList) > 0 {
+				if apiEndpoint != "" {
+					replaceHost := strings.TrimSuffix(apiEndpoint, "/bot%s/%s")
+					for i := range post.ImageList {
+						path := strings.TrimPrefix(post.ImageList[i], "https://api.telegram.org/")
+						post.ImageList[i] = fmt.Sprintf("%s/%s", replaceHost, path)
+					}
+				}
+			}
+			go publisher.Pub(post)
 		}
 	}()
 }

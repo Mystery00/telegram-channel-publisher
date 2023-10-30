@@ -1,10 +1,11 @@
 package bot
 
 import (
+	"telegram-channel-publisher/config"
+
 	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"telegram-channel-publisher/config"
 )
 
 var (
@@ -15,6 +16,9 @@ var (
 var bot *tgbot.BotAPI
 
 func InitBot() *tgbot.BotAPI {
+	if apiEndpoint == "" {
+		apiEndpoint = tgbot.APIEndpoint
+	}
 	newBot, err := tgbot.NewBotAPIWithAPIEndpoint(token, apiEndpoint)
 	if err != nil {
 		logrus.Panic(err)

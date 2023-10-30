@@ -1,12 +1,20 @@
 bot:
-  token: "1033630883:AAGPqZHE25Z6TJDlMqq1eFy01E3gmWbInqk"
-  endpoint: "https://telegram.api.mystery0.app/bot%s/%s"
+  token: "{{telegram.bot.token}}"
+  endpoint: ""
 
 log:
   home: "logs"
   file: "publisher.log"
-  color: true
-  local: true
+  color: false
+  local: false
+  debug: false
 
 publisher:
-  type: "log"
+  type: "halo"
+
+halo:
+  host: "{{halo.host}}"
+  token: "{{halo.token}}"
+  image:
+    group: ""
+    policy: "{{halo.image.policy}}"

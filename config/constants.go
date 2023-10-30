@@ -15,8 +15,16 @@ const (
 	LogHome  = "log.home"
 	LogFile  = "log.file"
 	LogColor = "log.color"
+	LogDebug = "log.debug"
 )
 
 const (
 	PublisherType = "publisher.type"
+)
+
+const (
+	HaloHost        = "halo.host"
+	HaloToken       = "halo.token"
+	HaloImageGroup  = "halo.image.group"
+	HaloImagePolicy = "halo.image.policy"
 )

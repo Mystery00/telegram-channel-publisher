@@ -1,9 +1,11 @@
 package publisher
 
 import (
-	"github.com/spf13/viper"
 	"telegram-channel-publisher/config"
 	"telegram-channel-publisher/model"
+
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 type Publisher interface {
@@ -16,6 +18,9 @@ var publisher Publisher
 func InitPublisher() {
 	pubType := viper.GetString(config.PublisherType)
 	switch pubType {
+	case "halo":
+		publisher = &HaloPublisher{}
+		break
 	default:
 		publisher = &LogPublisher{}
 		break
@@ -23,5 +28,11 @@ func InitPublisher() {
 }
 
 func Pub(post model.Post) {
+	defer func() {
+		if err := recover(); err != nil {
+			logrus.Errorf("publish error: %v", err)
+			return
+		}
+	}()
 	publisher.Publish(post)
 }

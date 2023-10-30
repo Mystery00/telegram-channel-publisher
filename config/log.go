@@ -2,13 +2,14 @@ package config
 
 import (
 	"fmt"
+	"io"
+	"os"
+
 	"github.com/Mystery00/lumberjack"
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"io"
-	"os"
 )
 
 func getLogFilePath(fileName string) string {
@@ -46,7 +47,11 @@ func InitLog() {
 	//设置输出
 	logrus.SetOutput(out)
 	//设置日志级别
-	logrus.SetLevel(logrus.DebugLevel)
+	if viper.GetBool(LogDebug) {
+		logrus.SetLevel(logrus.DebugLevel)
+	} else {
+		logrus.SetLevel(logrus.InfoLevel)
+	}
 	logrus.SetFormatter(&nested.Formatter{
 		TimestampFormat: "2006-01-02 15:04:05.000",
 		HideKeys:        true,
