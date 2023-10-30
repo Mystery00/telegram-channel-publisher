@@ -2,7 +2,7 @@ name: Build With Docker
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 env:
   DOCKER_NAMESPACE: mystery0
