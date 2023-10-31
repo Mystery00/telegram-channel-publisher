@@ -5,7 +5,7 @@
 ## 使用方法
 
 ```shell
-docker run -it --rm \
+docker run -d \
     -e CONFIG_HOME=/app/etc \
     -v /path/to/config.yaml:/app/etc/config.yaml \
     mystery0/telegram-channel-publisher:20231030-0b40
