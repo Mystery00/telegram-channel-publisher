@@ -17,6 +17,7 @@ var publisher Publisher
 
 func InitPublisher() {
 	pubType := viper.GetString(config.PublisherType)
+	logrus.Debugf("publisher type: %s", pubType)
 	switch pubType {
 	case "halo":
 		publisher = &HaloPublisher{}

@@ -14,6 +14,7 @@ import (
 func main() {
 	log := logrus.WithField("source", "main")
 	config.InitLog()
+	log.Infoln("Starting server...")
 	publisher.InitPublisher()
 	channel.HandleUpdate(bot.InitBot(), bot.ReceiveMessage())
 	quit := make(chan os.Signal)

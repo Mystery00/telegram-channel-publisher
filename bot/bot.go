@@ -19,6 +19,7 @@ func InitBot() *tgbot.BotAPI {
 	if apiEndpoint == "" {
 		apiEndpoint = tgbot.APIEndpoint
 	}
+	logrus.Debugf("init bot with api endpoint: %s", apiEndpoint)
 	newBot, err := tgbot.NewBotAPIWithAPIEndpoint(token, apiEndpoint)
 	if err != nil {
 		logrus.Panic(err)
