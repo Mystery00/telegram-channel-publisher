@@ -37,6 +37,7 @@ func requestWithContentType(uri, method, contentType string, body io.Reader) ([]
 	}
 	request.Header.Set("Content-Type", contentType)
 	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
+	logrus.Debugf("request halo: %s %s", method, url)
 	resp, err := http.DefaultClient.Do(request)
 	if err != nil {
 		return nil, err

@@ -50,7 +50,7 @@ func DownloadAndUpload(imageUrl string) (string, string) {
 	if err != nil {
 		panic(err)
 	}
-	resp, err := requestWithContentType("/apis/api.console.halo.run/v1alpha1/attachments/upload", http.MethodPost, writer.FormDataContentType(), body)
+	resp, err := requestWithContentType("apis/api.console.halo.run/v1alpha1/attachments/upload", http.MethodPost, writer.FormDataContentType(), body)
 	if err != nil {
 		panic(err)
 	}
@@ -63,7 +63,7 @@ func DownloadAndUpload(imageUrl string) (string, string) {
 			panic(fmt.Errorf("wait for attachment timeout"))
 		}
 		time.Sleep(time.Millisecond * 100)
-		attachmentInfo, err := request(fmt.Sprintf("/apis/storage.halo.run/v1alpha1/attachments/%s", attachmentName), http.MethodGet, nil)
+		attachmentInfo, err := request(fmt.Sprintf("apis/storage.halo.run/v1alpha1/attachments/%s", attachmentName), http.MethodGet, nil)
 		if err != nil {
 			panic(err)
 		}
