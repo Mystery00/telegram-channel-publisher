@@ -3,7 +3,7 @@
 将Telegram频道的内容发布到其他地方，例如Halo的瞬间
 
 ![Docker Pulls](https://img.shields.io/docker/pulls/mystery0/telegram-channel-publisher)
-![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/20231101-44ac)
+![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/20231101-19f6)
 
 
 ## 使用方法
