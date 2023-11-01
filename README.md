@@ -3,7 +3,7 @@
 将Telegram频道的内容发布到其他地方，例如Halo的瞬间
 
 ![Docker Pulls](https://img.shields.io/docker/pulls/mystery0/telegram-channel-publisher)
-![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/20231101-17d8)
+![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/20231101-44ac)
 
 
 ## 使用方法
@@ -12,7 +12,7 @@
 docker run -d \
     -e CONFIG_HOME=/app/etc \
     -v /path/to/config.yaml:/app/etc/config.yaml \
-    mystery0/telegram-channel-publisher:20231101-14a5
+    mystery0/telegram-channel-publisher:20231101-44ac
 ```
 > 备注：后面会把版本号改成数字的形式，而不是现在这个格式
 
