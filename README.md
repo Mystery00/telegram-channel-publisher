@@ -2,6 +2,10 @@
 
 将Telegram频道的内容发布到其他地方，例如Halo的瞬间
 
+![Docker Pulls](https://img.shields.io/docker/pulls/mystery0/telegram-channel-publisher)
+![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/20231101-17d8)
+
+
 ## 使用方法
 
 ```shell
@@ -22,6 +26,10 @@ bot:
   token: "{{telegram.bot.token}}"
   # 机器人的接入点信息，如果部署的服务器无法访问Telegram，可以使用代理的形式来访问
   endpoint: ""
+  # 指定频道id，如果指定，那么只有对应频道的消息才会被处理，如果不指定，那么所有频道的消息都会被处理
+  channel: ""
+  # 指定发送人id，如果指定，那么只有对应发送人的消息才会被处理，如果不指定，那么所有发送人的消息都会被处理
+  sender: ""
 
 log:
   home: "logs"
