@@ -2,6 +2,7 @@ package halo
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"text/template"
@@ -13,13 +14,19 @@ import (
 const templateDir = "/app/templates"
 
 func NewMoment(m Moment) {
-	tplPath := fmt.Sprintf("%s/halo-text.tpl", templateDir)
-	if m.ImageURL != "" {
-		tplPath = fmt.Sprintf("%s/halo-image.tpl", templateDir)
+	medium, err := json.Marshal(m.Attachments)
+	if err != nil {
+		panic(err)
 	}
+	tt := momentTpl{
+		Content:     m.Content,
+		Medium:      string(medium),
+		ReleaseTime: m.ReleaseTime,
+	}
+	tplPath := fmt.Sprintf("%s/halo-moment.tpl", templateDir)
 	t := template.Must(template.ParseGlob(tplPath))
 	var tmplBytes bytes.Buffer
-	err := t.Execute(&tmplBytes, m)
+	err = t.Execute(&tmplBytes, tt)
 	if err != nil {
 		panic(err)
 	}
@@ -32,9 +39,20 @@ func NewMoment(m Moment) {
 	logrus.Infof("publish moment success")
 }
 
+type momentTpl struct {
+	Content     string
+	Medium      string
+	ReleaseTime time.Time
+}
+
 type Moment struct {
-	Content       string
-	ImageMimeType string
-	ImageURL      string
-	ReleaseTime   time.Time
+	Content     string
+	Attachments []Attachment
+	ReleaseTime time.Time
+}
+
+type Attachment struct {
+	FileType     string `json:"type"`
+	FileMimeType string `json:"originType"`
+	FileURL      string `json:"url"`
 }

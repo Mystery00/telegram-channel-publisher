@@ -82,6 +82,8 @@ func detectImageMimeType(imageUrl string) string {
 		return "image/png"
 	} else if strings.HasSuffix(imageUrl, ".webp") {
 		return "image/webp"
+	} else if strings.HasSuffix(imageUrl, ".mp4") {
+		return "video/mp4"
 	} else {
 		panic(fmt.Errorf("unsupported image type for: %s", imageUrl))
 	}

@@ -7,6 +7,7 @@
   "spec": {
     "content": {
       "html": "{{.Content}}",
+      "medium": {{.Medium}},
       "raw": "{{.Content}}"
     },
     "owner": "",
