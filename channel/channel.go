@@ -15,7 +15,6 @@ import (
 var (
 	apiEndpoint = viper.GetString(config.ApiEndpoint)
 	channel     = viper.GetInt64(config.Channel)
-	sender      = viper.GetString(config.Sender)
 )
 
 func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
@@ -30,12 +29,6 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 			if channel != 0 && ch.ChannelPost.Chat.ID != channel {
 				//不是指定频道的消息，跳过
 				logrus.Debugf("not channel [%d] post, skip", channel)
-				continue
-			}
-			logrus.Debugf("sender: %s", ch.ChannelPost.SenderChat.UserName)
-			if sender != "" && ch.ChannelPost.SenderChat.UserName != sender {
-				//不是指定频道的消息，跳过
-				logrus.Debugf("not sender [%s] post, skip", sender)
 				continue
 			}
 			msg := ch.ChannelPost

@@ -9,7 +9,6 @@ const (
 	BotToken    = "bot.token"
 	ApiEndpoint = "bot.endpoint"
 	Channel     = "bot.channel"
-	Sender      = "bot.sender"
 )
 
 const (
