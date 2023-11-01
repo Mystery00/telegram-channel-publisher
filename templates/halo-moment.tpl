@@ -6,7 +6,7 @@
   },
   "spec": {
     "content": {
-      "html": "{{.Content}}",
+      "html": "{{.Html}}",
       "medium": {{.Medium}},
       "raw": "{{.Content}}"
     },
