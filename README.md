@@ -12,7 +12,7 @@
 docker run -d \
     -e CONFIG_HOME=/app/etc \
     -v /path/to/config.yaml:/app/etc/config.yaml \
-    mystery0/telegram-channel-publisher:20231030-0b40
+    mystery0/telegram-channel-publisher:20231101-14a5
 ```
 > 备注：后面会把版本号改成数字的形式，而不是现在这个格式
 

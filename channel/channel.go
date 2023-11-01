@@ -26,7 +26,7 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 				logrus.Debugf("not channel post, skip")
 				continue
 			}
-			logrus.Debugf("receive channel post from: %s", ch.ChannelPost.Chat.UserName)
+			logrus.Debugf("receive channel post from: %d", ch.ChannelPost.Chat.ID)
 			if channel != 0 && ch.ChannelPost.Chat.ID != channel {
 				//不是指定频道的消息，跳过
 				logrus.Debugf("not channel [%d] post, skip", channel)
@@ -78,13 +78,20 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 				//其他类型消息，跳过
 				continue
 			}
-			//替换图片地址
-			if len(post.ImageList) > 0 {
-				if apiEndpoint != "" {
+			//替换地址
+			if apiEndpoint != "" {
+				if len(post.ImageList) > 0 {
 					replaceHost := strings.TrimSuffix(apiEndpoint, "/bot%s/%s")
 					for i := range post.ImageList {
 						path := strings.TrimPrefix(post.ImageList[i], "https://api.telegram.org/")
 						post.ImageList[i] = fmt.Sprintf("%s/%s", replaceHost, path)
+					}
+				}
+				if len(post.VideoList) > 0 {
+					replaceHost := strings.TrimSuffix(apiEndpoint, "/bot%s/%s")
+					for i := range post.VideoList {
+						path := strings.TrimPrefix(post.VideoList[i], "https://api.telegram.org/")
+						post.VideoList[i] = fmt.Sprintf("%s/%s", replaceHost, path)
 					}
 				}
 			}
