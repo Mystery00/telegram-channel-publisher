@@ -17,7 +17,7 @@ import (
 var linkReg = regexp.MustCompile(`(http(s)://([^ \n]+))`)
 var tagReg = regexp.MustCompile(`#([^ \n]+)`)
 
-const templateDir = "templates"
+const templateDir = "/app/templates"
 
 func NewMoment(m Moment) {
 	medium, err := json.Marshal(m.Attachments)
