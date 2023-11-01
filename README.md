@@ -57,7 +57,7 @@ halo:
 
 ### 创建Halo的token
 
-![创建halotoken](img/create-halo-token.png)
+![创建token](img/create-halo-token.png)
 
 创建令牌的时候，需要授予的权限如下：
 - 附件查看：查询附件的信息以获取图片地址
