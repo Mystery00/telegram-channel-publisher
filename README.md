@@ -5,6 +5,12 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/mystery0/telegram-channel-publisher)
 ![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/latest)
 
+示例： 
+
+telegram频道： [Mystery0的随缘日常](https://t.me/Mystery0Channel)
+
+Halo站点： [瞬间 - Mystery0の小站](https://blog.mystery0.vip/moments)
+
 
 ## 使用方法
 
