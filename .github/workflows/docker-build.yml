@@ -16,7 +16,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: 生成镜像Tag
         run: |
-          docker_image_tag="${{ env.DOCKER_NAMESPACE }}/${{ env.DOCKER_NAME }}:${{  github.ref_name }}"
+          version=$(echo $GITHUB_REF | sed 's/refs\/tags\/v//')
+          docker_image_tag="${{ env.DOCKER_NAMESPACE }}/${{ env.DOCKER_NAME }}:$version"
           docker_latest_image_tag="${{ env.DOCKER_NAMESPACE }}/${{ env.DOCKER_NAME }}:latest"
           echo "docker_image_tag=$docker_image_tag,$docker_latest_image_tag" >> $GITHUB_ENV
       - uses: docker/setup-qemu-action@v3
@@ -37,3 +38,8 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ env.docker_image_tag }}
+      - name: 创建GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          draft: false
+          prerelease: false
