@@ -3,8 +3,16 @@ package model
 type Post struct {
 	Content   string
 	Sender    string
+	Entities  []PostEntity
 	ImageList []string
 	VideoList []string
+}
+
+type PostEntity struct {
+	Type   string
+	Offset int
+	Length int
+	Url    string
 }
 
 func (p *Post) WithImage(imageUrl string) *Post {

@@ -2,6 +2,7 @@ package channel
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 	"telegram-channel-publisher/config"
 	"telegram-channel-publisher/model"
@@ -15,6 +16,9 @@ import (
 var (
 	apiEndpoint = viper.GetString(config.ApiEndpoint)
 	channel     = viper.GetInt64(config.Channel)
+	filterTags  = viper.GetStringSlice(config.FilterTags)
+
+	allowTypes = []string{"text_link", "hashtag", "pre"}
 )
 
 func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
@@ -31,6 +35,22 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 				logrus.Debugf("not channel [%d] post, skip", channel)
 				continue
 			}
+			if len(filterTags) > 0 {
+				//有过滤标签，检查是否包含
+				skip := false
+				for _, tag := range filterTags {
+					f := fmt.Sprintf("#%s", tag)
+					if strings.Contains(ch.ChannelPost.Text, f) {
+						//包含指定标签，跳过
+						logrus.Infof("contain tag [%s] post, skip", tag)
+						skip = true
+						continue
+					}
+				}
+				if skip {
+					continue
+				}
+			}
 			msg := ch.ChannelPost
 			post := model.Post{
 				Sender: msg.SenderChat.UserName,
@@ -38,6 +58,7 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 			if msg.Animation != nil {
 				//GIF
 				post.Content = msg.Caption
+				post.Entities = dealEntities(post.Content, msg.CaptionEntities)
 				url, err := readUrl(bot, msg.Animation.FileID)
 				if err != nil {
 					logrus.Errorf("read url error: %v", err)
@@ -55,6 +76,7 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 			} else if msg.Photo != nil {
 				//带图片的消息
 				post.Content = msg.Caption
+				post.Entities = dealEntities(post.Content, msg.CaptionEntities)
 				if len(msg.Photo) == 0 {
 					continue
 				}
@@ -67,6 +89,7 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 			} else if msg.Text != "" {
 				//纯文本消息
 				post.Content = msg.Text
+				post.Entities = dealEntities(post.Content, msg.Entities)
 			} else {
 				//其他类型消息，跳过
 				continue
@@ -112,4 +135,20 @@ func readUrl(bot *tgbot.BotAPI, fileId string) (string, error) {
 	}
 	link := file.Link(bot.Token)
 	return link, nil
+}
+
+func dealEntities(text string, list []tgbot.MessageEntity) []model.PostEntity {
+	entities := make([]model.PostEntity, 0)
+	for _, entity := range list {
+		if !slices.Contains(allowTypes, entity.Type) {
+			continue
+		}
+		entities = append(entities, model.PostEntity{
+			Type:   entity.Type,
+			Offset: entity.Offset,
+			Length: entity.Length,
+			Url:    entity.URL,
+		})
+	}
+	return entities
 }

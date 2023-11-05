@@ -9,6 +9,7 @@ const (
 	BotToken    = "bot.token"
 	ApiEndpoint = "bot.endpoint"
 	Channel     = "bot.channel"
+	FilterTags  = "bot.filter.tags"
 )
 
 const (
