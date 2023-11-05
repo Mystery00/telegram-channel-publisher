@@ -12,7 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const templateDir = "D:\\GolandProjects\\telegram-channel-publisher\\templates"
+const templateDir = "/app/templates"
 
 func NewMoment(m Moment) {
 	medium, err := json.Marshal(m.Attachments)
