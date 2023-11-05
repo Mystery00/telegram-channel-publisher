@@ -11,9 +11,14 @@
 ```shell
 docker run -d \
     -e CONFIG_HOME=/app/etc \
+    -v /path/to/logs:/app/logs \
     -v /path/to/config.yaml:/app/etc/config.yaml \
     mystery0/telegram-channel-publisher:latest
 ```
+
+`/app/logs` 是运行时的日志目录，如果出现无法启动的情况，建议单独挂载出来，方便查看日志。
+
+`/app/etc` 是配置文件目录，对应环境变量 `CONFIG_HOME`
 
 环境变量是指定服务使用的配置文件的目录，配置文件的名称必须是`config.yaml`，如果运行时找不到配置文件，会报错退出。
 
@@ -35,7 +40,7 @@ log:
   file: "publisher.log"
   color: false
   local: false
-  # 调试模式
+  # 调试模式，出现问题的时候建议打开，会输出更多的日志信息
   debug: false
 
 publisher:
