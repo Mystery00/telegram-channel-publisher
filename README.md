@@ -12,9 +12,8 @@
 docker run -d \
     -e CONFIG_HOME=/app/etc \
     -v /path/to/config.yaml:/app/etc/config.yaml \
-    mystery0/telegram-channel-publisher:20231101-19f6
+    mystery0/telegram-channel-publisher:latest
 ```
-> 备注：后面会把版本号改成数字的形式，而不是现在这个格式
 
 环境变量是指定服务使用的配置文件的目录，配置文件的名称必须是`config.yaml`，如果运行时找不到配置文件，会报错退出。
 
@@ -28,6 +27,8 @@ bot:
   endpoint: ""
   # 指定频道id，如果指定，那么只有对应频道的消息才会被处理，如果不指定，那么所有频道的消息都会被处理
   channel: ""
+  # 需要过滤的频道消息，这里可以填上对应的标签，例如：["tag1", "tag2"]，那么就会过滤任何包含 “#tag1”、“#tag2” 的消息
+  filter: []
 
 log:
   home: "logs"
