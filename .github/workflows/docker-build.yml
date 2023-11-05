@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 env:
   DOCKER_NAMESPACE: mystery0
   DOCKER_NAME: telegram-channel-publisher
@@ -15,10 +16,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: 生成镜像Tag
         run: |
-          version_name=`git rev-parse --short=4 HEAD`
-          date=`date "+%Y%m%d"`
-          docker_image_tag="${{ env.DOCKER_NAMESPACE }}/${{ env.DOCKER_NAME }}:${date}-${version_name}"
-          echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
+          docker_image_tag="${{ env.DOCKER_NAMESPACE }}/${{ env.DOCKER_NAME }}:${{  github.ref_name }}"
+          docker_latest_image_tag="${{ env.DOCKER_NAMESPACE }}/${{ env.DOCKER_NAME }}:latest"
+          echo "docker_image_tag=$docker_image_tag,$docker_latest_image_tag" >> $GITHUB_ENV
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - name: 登录仓库
