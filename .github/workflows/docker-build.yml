@@ -39,5 +39,4 @@ jobs:
       - name: 创建GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          draft: false
-          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
