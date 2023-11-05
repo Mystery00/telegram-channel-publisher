@@ -5,12 +5,11 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/mystery0/telegram-channel-publisher)
 ![Docker Image Size](https://img.shields.io/docker/image-size/mystery0/telegram-channel-publisher/latest)
 
-示例： 
+示例：
 
 telegram频道： [Mystery0的随缘日常](https://t.me/Mystery0Channel)
 
 Halo站点： [瞬间 - Mystery0の小站](https://blog.mystery0.vip/moments)
-
 
 ## 使用方法
 
@@ -39,7 +38,7 @@ bot:
   # 指定频道id，如果指定，那么只有对应频道的消息才会被处理，如果不指定，那么所有频道的消息都会被处理
   channel: ""
   # 需要过滤的频道消息，这里可以填上对应的标签，例如：["tag1", "tag2"]，那么就会过滤任何包含 “#tag1”、“#tag2” 的消息
-  filter: []
+  filter: [ ]
 
 log:
   home: "logs"
@@ -70,6 +69,7 @@ halo:
 ![创建token](img/create-halo-token.png)
 
 创建令牌的时候，需要授予的权限如下：
+
 - 附件查看：查询附件的信息以获取图片地址
 - 附件管理：上传图片需要这个权限
 - 瞬间管理：发布瞬间需要这个权限
@@ -78,3 +78,17 @@ halo:
 ### 获取Halo的图片存储策略
 
 ![获取policy](img/get_policy.png)
+
+# FAQ
+
+1. 为什么图片这么糊？
+
+> 目前已经是获取 Telegram 给的最高分辨率的图了，bot api似乎没给原图的接口，如果有，欢迎提issue告诉我
+
+2. Emoji表情不支持吗？解析错位了
+
+> Emoji表情在 Telegram 的预解析中所占长度与 Go 获取的不一致，因此会出现emoji表情后的所有内容都错位的情况，目前还没找到解决方案，如果有，欢迎提issue告诉我
+
+3. 遇到了其他的问题？
+
+> 欢迎提issue告诉我
