@@ -63,11 +63,31 @@ func (l *HaloPublisher) Publish(post model.Post) {
 			break
 		case "pre":
 			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
-			content.WriteString(fmt.Sprintf("<pre><code>%s</code></pre>", s))
+			content.WriteString(fmt.Sprintf("<pre>%s</pre>", s))
 			break
 		case "text_link":
 			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
 			content.WriteString(fmt.Sprintf("<a href=\"%s\">%s</a>", block.Url, s))
+			break
+		case "bold":
+			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
+			content.WriteString(fmt.Sprintf("<strong>%s</strong>", s))
+			break
+		case "italic":
+			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
+			content.WriteString(fmt.Sprintf("<em>%s</em>", s))
+			break
+		case "underline":
+			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
+			content.WriteString(fmt.Sprintf("<u>%s</u>", s))
+			break
+		case "strikethrough":
+			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
+			content.WriteString(fmt.Sprintf("<s>%s</s>", s))
+			break
+		case "code":
+			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
+			content.WriteString(fmt.Sprintf("<code>%s</code>", s))
 			break
 		}
 		index = block.EndIndex

@@ -2,6 +2,7 @@ bot:
   token: "{{telegram.bot.token}}"
   endpoint: ""
   channel: ""
+  filter: []
 
 log:
   home: "logs"

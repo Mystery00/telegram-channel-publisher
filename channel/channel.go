@@ -18,7 +18,7 @@ var (
 	channel     = viper.GetInt64(config.Channel)
 	filterTags  = viper.GetStringSlice(config.FilterTags)
 
-	allowTypes = []string{"text_link", "hashtag", "pre"}
+	allowTypes = []string{"text_link", "hashtag", "pre", "bold", "italic", "underline", "strikethrough", "code"}
 )
 
 func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
