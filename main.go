@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
 	"os"
 	"os/signal"
 	"syscall"
@@ -9,6 +8,8 @@ import (
 	"telegram-channel-publisher/channel"
 	"telegram-channel-publisher/config"
 	"telegram-channel-publisher/publisher"
+
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -17,6 +18,7 @@ func main() {
 	log.Infoln("Starting server...")
 	publisher.InitPublisher()
 	channel.HandleUpdate(bot.InitBot(), bot.ReceiveMessage())
+	log.Infoln("Server started successfully!")
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit

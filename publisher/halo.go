@@ -63,7 +63,7 @@ func (l *HaloPublisher) Publish(post model.Post) {
 			break
 		case "pre":
 			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
-			content.WriteString(fmt.Sprintf("<pre>%s</pre>", s))
+			content.WriteString(fmt.Sprintf("<pre><code>%s</code></pre>", s))
 			break
 		case "text_link":
 			s := parseContent(originContent, block.StartIndex, block.EndIndex, 0)
