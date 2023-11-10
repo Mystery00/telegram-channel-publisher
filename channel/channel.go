@@ -58,7 +58,7 @@ func HandleUpdate(bot *tgbot.BotAPI, inCh <-chan tgbot.Update) {
 					}
 				}
 				handleMessage(bot, ch.ChannelPost, ch.ChannelPost.SenderChat.UserName)
-			} else if ch.Message.Chat.IsPrivate() {
+			} else if ch.Message != nil && ch.Message.Chat.IsPrivate() {
 				//私聊消息
 				logrus.Debugf("receive private message from: %d", ch.Message.Chat.ID)
 				if !privateEnable {
