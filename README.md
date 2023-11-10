@@ -32,7 +32,7 @@ docker run -d \
 ```yaml
 bot:
   # 机器人的token
-  token: "{{telegram.bot.token}}"
+  token: "XXXXXXXXXXXXXXXXXXXX"
   # 机器人的接入点信息，如果部署的服务器无法访问Telegram，可以使用代理的形式来访问
   endpoint: ""
   # 指定频道id，如果指定，那么只有对应频道的消息才会被处理，如果不指定，那么所有频道的消息都会被处理
@@ -53,15 +53,15 @@ publisher:
   type: "halo"
 
 halo:
-  # Halo的访问域名，例如 https://blog.mystery0.vip
-  host: "{{halo.host}}"
-  # Halo的token 参考下图进行创建
-  token: "{{halo.token}}"
+  # Halo的访问域名
+  host: "https://blog.mystery0.vip"
+  # Halo的token 参考下图进行创建，注意，首尾的大括号要删掉
+  token: "pat_XXXXXXXX"
   image:
     # 消息中的图片的分组信息，最好是在管理后台自己创建一个分组专门放瞬间的图片，方便管理，可为空
-    group: ""
+    group: "attachment-group-XXXXXXXX"
     # 消息中的图片的存储策略，参考后续内容进行获取
-    policy: "{{halo.image.policy}}"
+    policy: "attachment-policy-XXXXXXXX"
 ```
 
 ### 创建Halo的token

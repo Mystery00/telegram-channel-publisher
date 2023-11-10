@@ -1,5 +1,5 @@
 bot:
-  token: "{{telegram.bot.token}}"
+  token: "XXXXXXXXXXXXXXXXXXXX"
   endpoint: ""
   channel: ""
   filter: []
@@ -15,8 +15,8 @@ publisher:
   type: "halo"
 
 halo:
-  host: "{{halo.host}}"
-  token: "{{halo.token}}"
+  host: "https://blog.mystery0.vip"
+  token: "pat_XXXXXXXX"
   image:
-    group: ""
-    policy: "{{halo.image.policy}}"
+    group: "attachment-group-XXXXXXXX"
+    policy: "attachment-policy-XXXXXXXX"
