@@ -8,8 +8,13 @@ const (
 const (
 	BotToken    = "bot.token"
 	ApiEndpoint = "bot.endpoint"
-	Channel     = "bot.channel"
-	FilterTags  = "bot.filter.tags"
+
+	ChannelEnable = "bot.channel.enable"
+	ChannelId     = "bot.channel.id"
+	ChannelFilter = "bot.channel.filter"
+
+	PrivateEnable = "bot.private.enable"
+	PrivateSender = "bot.private.sender"
 )
 
 const (

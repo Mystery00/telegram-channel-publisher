@@ -35,10 +35,18 @@ bot:
   token: "XXXXXXXXXXXXXXXXXXXX"
   # 机器人的接入点信息，如果部署的服务器无法访问Telegram，可以使用代理的形式来访问
   endpoint: ""
-  # 指定频道id，如果指定，那么只有对应频道的消息才会被处理，如果不指定，那么所有频道的消息都会被处理
-  channel: ""
-  # 需要过滤的频道消息，这里可以填上对应的标签，例如：["tag1", "tag2"]，那么就会过滤任何包含 “#tag1”、“#tag2” 的消息
-  filter: [ ]
+  channel:
+    # 是否启用频道消息的处理
+    enable: true
+    # 指定频道id，如果指定，那么只有对应频道的消息才会被处理，如果不指定，那么所有频道的消息都会被处理
+    id: ""
+    # 需要过滤的频道消息，这里可以填上对应的标签，例如：["tag1", "tag2"]，那么就会过滤任何包含 “#tag1”、“#tag2” 的消息
+    filter: []
+  private:
+    # 是否启用私聊消息的处理
+    enable: true
+    # 指定用户id，如果指定，那么只有对应用户的消息才会被处理，如果不指定，那么所有用户的消息都会被处理
+    sender: ""
 
 log:
   home: "logs"
@@ -46,7 +54,7 @@ log:
   color: false
   local: false
   # 调试模式，出现问题的时候建议打开，会输出更多的日志信息
-  debug: false
+  debug: true
 
 publisher:
   # 发布的类型，目前只支持log和halo，log是将内容输出到日志文件，halo是将内容发布到Halo的瞬间
@@ -55,7 +63,7 @@ publisher:
 halo:
   # Halo的访问域名
   host: "https://blog.mystery0.vip"
-  # Halo的token 参考下图进行创建，注意，首尾的大括号要删掉
+  # Halo的token 参考下图进行创建
   token: "pat_XXXXXXXX"
   image:
     # 消息中的图片的分组信息，最好是在管理后台自己创建一个分组专门放瞬间的图片，方便管理，可为空
@@ -78,6 +86,11 @@ halo:
 ### 获取Halo的图片存储策略
 
 ![获取policy](img/get_policy.png)
+
+# TODO
+- [x] 支持对bot私聊
+- [ ] 多张图片合起来发送瞬间
+- [ ] 支持内容中包含emoji表情
 
 # FAQ
 

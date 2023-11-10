@@ -1,15 +1,20 @@
 bot:
   token: "XXXXXXXXXXXXXXXXXXXX"
   endpoint: ""
-  channel: ""
-  filter: []
+  channel:
+    enable: true
+    id: ""
+    filter: []
+  private:
+    enable: true
+    sender: ""
 
 log:
   home: "logs"
   file: "publisher.log"
   color: false
   local: false
-  debug: false
+  debug: true
 
 publisher:
   type: "halo"
