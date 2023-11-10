@@ -22,7 +22,7 @@ func InitBot() *tgbot.BotAPI {
 	logrus.Debugf("init bot with api endpoint: %s", apiEndpoint)
 	newBot, err := tgbot.NewBotAPIWithAPIEndpoint(token, apiEndpoint)
 	if err != nil {
-		logrus.Panic(err)
+		logrus.Fatal(err)
 	}
 	newBot.Debug = false
 	logrus.Infof("Authorized on account %s", newBot.Self.UserName)
