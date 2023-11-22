@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 	"text/template"
 	"time"
@@ -12,7 +13,14 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const templateDir = "/app/templates"
+var templateDir = "/app/templates"
+
+func init() {
+	env, exist := os.LookupEnv("TEMPLATE_DIR")
+	if exist {
+		templateDir = env
+	}
+}
 
 func NewMoment(m Moment) {
 	medium, err := json.Marshal(m.Attachments)
