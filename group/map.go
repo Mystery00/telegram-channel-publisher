@@ -2,41 +2,56 @@ package group
 
 import (
 	"sync"
+	"time"
 
 	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type RWMap struct {
 	sync.RWMutex
-	m map[string][]tgbot.Message
+	m map[string]MediaGroup
 }
 
 func NewRWMap() *RWMap {
 	return &RWMap{
-		m: make(map[string][]tgbot.Message),
+		m: make(map[string]MediaGroup),
 	}
 }
 
-func (m *RWMap) Get(key string) ([]tgbot.Message, bool) {
+func (m *RWMap) Get(key string) (MediaGroup, bool) {
 	m.RLock()
 	defer m.RUnlock()
 	val, ok := m.m[key]
 	return val, ok
 }
 
-func (m *RWMap) Add(key string, val tgbot.Message) {
+func (m *RWMap) Add(key string, msg tgbot.Message, executeTimeMs int64) {
 	m.Lock()
 	defer m.Unlock()
-	m.m[key] = append(m.m[key], val)
+	mediaGroup, exist := m.m[key]
+	var mg *MediaGroup
+	if !exist {
+		mg = NewMediaGroup(executeTimeMs)
+	} else {
+		mg = &mediaGroup
+	}
+	mg.AddMessage(executeTimeMs, msg)
+	m.m[key] = *mg
 }
 
-func (m *RWMap) Group(f func(string, []tgbot.Message)) {
+func (m *RWMap) Group(f func(string, MediaGroup)) {
 	m.Lock()
-	arr := make(map[string][]tgbot.Message)
+	arr := make(map[string]MediaGroup)
+	notExpired := make(map[string]MediaGroup)
+	now := time.Now().UnixMilli()
 	for k, v := range m.m {
-		arr[k] = v
+		if v.ExpectExecuteTimeMs > now {
+			notExpired[k] = v
+		} else {
+			arr[k] = v
+		}
 	}
-	m.m = make(map[string][]tgbot.Message)
+	m.m = notExpired
 	m.Unlock()
 	for k, v := range arr {
 		f(k, v)

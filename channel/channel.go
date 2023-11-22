@@ -15,6 +15,8 @@ import (
 )
 
 var (
+	delayTimeS = viper.GetInt64(config.MediaDelay)
+
 	channelEnable = viper.GetBool(config.ChannelEnable)
 	channelId     = viper.GetInt64(config.ChannelId)
 	channelFilter = viper.GetStringSlice(config.ChannelFilter)
@@ -94,7 +96,7 @@ func handleMessage(msg *tgbot.Message) {
 		post.WithImage(url)
 	} else if msg.Photo != nil {
 		//带图片的消息
-		if msg.MediaGroupID != "" {
+		if delayTimeS != 0 && msg.MediaGroupID != "" {
 			//图片组
 			group.AddMediaMessage(*msg)
 			return

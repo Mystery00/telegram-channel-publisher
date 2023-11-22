@@ -1,6 +1,8 @@
 bot:
   token: "XXXXXXXXXXXXXXXXXXXX"
   endpoint: ""
+  media:
+    delay: 5
   channel:
     enable: true
     id: ""

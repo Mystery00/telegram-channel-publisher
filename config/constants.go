@@ -8,6 +8,7 @@ const (
 const (
 	BotToken    = "bot.token"
 	ApiEndpoint = "bot.endpoint"
+	MediaDelay  = "bot.media.delay"
 
 	ChannelEnable = "bot.channel.enable"
 	ChannelId     = "bot.channel.id"
