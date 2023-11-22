@@ -7,6 +7,7 @@ import (
 	"telegram-channel-publisher/bot"
 	"telegram-channel-publisher/channel"
 	"telegram-channel-publisher/config"
+	"telegram-channel-publisher/group"
 	"telegram-channel-publisher/publisher"
 
 	"github.com/sirupsen/logrus"
@@ -17,7 +18,9 @@ func main() {
 	config.InitLog()
 	log.Infoln("Starting server...")
 	publisher.InitPublisher()
-	channel.HandleUpdate(bot.InitBot(), bot.ReceiveMessage())
+	bot.InitBot()
+	channel.HandleUpdate(bot.ReceiveMessage())
+	group.InitMediaHandleCron()
 	log.Infoln("Server started successfully!")
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)

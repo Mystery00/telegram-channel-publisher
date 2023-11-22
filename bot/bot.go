@@ -15,7 +15,7 @@ var (
 
 var bot *tgbot.BotAPI
 
-func InitBot() *tgbot.BotAPI {
+func InitBot() {
 	if apiEndpoint == "" {
 		apiEndpoint = tgbot.APIEndpoint
 	}
@@ -27,7 +27,6 @@ func InitBot() *tgbot.BotAPI {
 	newBot.Debug = false
 	logrus.Infof("Authorized on account %s", newBot.Self.UserName)
 	bot = newBot
-	return bot
 }
 
 func ReceiveMessage() <-chan tgbot.Update {

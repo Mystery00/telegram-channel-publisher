@@ -2,7 +2,6 @@ package model
 
 type Post struct {
 	Content   string
-	Sender    string
 	Entities  []PostEntity
 	ImageList []string
 	VideoList []string
