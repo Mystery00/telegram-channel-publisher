@@ -35,6 +35,7 @@ bot:
   token: "XXXXXXXXXXXXXXXXXXXX"
   # 机器人的接入点信息，如果部署的服务器无法访问Telegram，可以使用代理的形式来访问，可以参考以下链接自行搭建
   # https://blog.mystery0.vip/archives/cloudflare_worker_proxy_telegram
+  # 填写格式 "https://cfworker.xyz.com/bot%s/%s"
   endpoint: ""
   media:
     # 媒体消息处理延迟时间，单位为秒，如果不需要延迟，可以设置为0，收到带图片的消息之后会延迟指定时间再处理，目的是为了接收到完整的图片组
