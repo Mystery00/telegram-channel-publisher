@@ -100,14 +100,23 @@ halo:
 
 # FAQ
 
-1. 为什么图片这么糊？
+1. 为什么配置好了之后在频道发送消息没有反应？但是私聊会有反应？
+
+> 检查一下机器人的权限，需要有读取消息的权限，Telegram的频道中，机器人需要被设置为管理员才能读取到消息
+
+2. 服务运行一会之后出现 `Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first` ？
+
+> 请检查服务使用的bot有没有在其他地方使用，例如其他的机器人服务，如果有，请停止其他的服务，或者使用不同的bot
+> Telegram的bot api有一个限制，同一个bot不能多次设置webhook，否则会报错
+
+3. 为什么图片这么糊？
 
 > 目前已经是获取 Telegram 给的最高分辨率的图了，bot api似乎没给原图的接口，如果有，欢迎提issue告诉我
 
-2. Emoji表情不支持吗？解析错位了
+4. Emoji表情不支持吗？解析错位了
 
 > Emoji表情在 Telegram 的预解析中所占长度与 Go 获取的不一致，因此会出现emoji表情后的所有内容都错位的情况，目前还没找到解决方案，如果有，欢迎提issue告诉我
 
-3. 遇到了其他的问题？
+5. 遇到了其他的问题？
 
 > 欢迎提issue告诉我
