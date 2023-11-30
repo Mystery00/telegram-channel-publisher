@@ -107,6 +107,7 @@ halo:
 2. 服务运行一会之后出现 `Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first` ？
 
 > 请检查服务使用的bot有没有在其他地方使用，例如其他的机器人服务，如果有，请停止其他的服务，或者使用不同的bot
+
 > Telegram的bot api有一个限制，同一个bot不能多次设置webhook，否则会报错
 
 3. 为什么图片这么糊？
