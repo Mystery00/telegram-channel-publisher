@@ -45,9 +45,11 @@ func ReceiveMessage() <-chan tgbot.Update {
 }
 
 func DeleteMessage(chatId int64, messageId int, delayTime int) {
-	time.Sleep(time.Duration(delayTime) * time.Second)
-	if resp, err := bot.Request(tgbot.NewDeleteMessage(chatId, messageId)); err != nil || !resp.Ok {
-		logrus.Warnf("Error delete message, resp: %s, err: %v", string(resp.Result), err)
+	if delayTime > 0 {
+		time.Sleep(time.Duration(delayTime) * time.Second)
+		if resp, err := bot.Request(tgbot.NewDeleteMessage(chatId, messageId)); err != nil || !resp.Ok {
+			logrus.Warnf("Error delete message, resp: %s, err: %v", string(resp.Result), err)
+		}
 	}
 }
 

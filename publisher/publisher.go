@@ -56,8 +56,8 @@ func replySuccess(post model.Post) {
 		return
 	}
 	logrus.Debugf("reply success message to telegram, delay time: %d", delayTime)
-	if delayTime <= 0 {
-		delayTime = 1
+	if delayTime < 0 {
+		delayTime = 0
 	}
 	if delayTime > 60 {
 		delayTime = 60
