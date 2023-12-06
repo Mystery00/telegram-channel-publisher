@@ -126,5 +126,6 @@ func handleMessage(msg *tgbot.Message, isPrivate bool) {
 	//设置消息ID
 	post.MessageId = msg.MessageID
 	post.ChatId = msg.Chat.ID
+	post.IsPrivate = isPrivate
 	go publisher.Pub(post)
 }
