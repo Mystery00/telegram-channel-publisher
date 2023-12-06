@@ -27,7 +27,7 @@ func DownloadAndUpload(imageUrl string) (string, string) {
 	}
 	defer response.Body.Close()
 	if response.StatusCode != http.StatusOK {
-		panic(fmt.Errorf("download image error: %d", response.StatusCode))
+		panic(fmt.Errorf("publish moment error: %v", err))
 	}
 	//截取文件名
 	i := strings.LastIndex(imageUrl, ".")
@@ -60,7 +60,7 @@ func DownloadAndUpload(imageUrl string) (string, string) {
 	for {
 		if index > 100 {
 			//超时
-			panic(fmt.Errorf("wait for attachment timeout"))
+			panic(fmt.Errorf("publish moment error: %v", err))
 		}
 		time.Sleep(time.Millisecond * 100)
 		attachmentInfo, err := request(fmt.Sprintf("apis/storage.halo.run/v1alpha1/attachments/%s", attachmentName), http.MethodGet, nil)

@@ -7,9 +7,15 @@ bot:
     enable: true
     id: ""
     filter: []
+    reply:
+      enable: true
+      delay: 10
   private:
     enable: true
     sender: ""
+    reply:
+      enable: true
+      delay: 10
 
 log:
   home: "logs"

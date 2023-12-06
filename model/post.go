@@ -5,6 +5,9 @@ type Post struct {
 	Entities  []PostEntity
 	ImageList []string
 	VideoList []string
+	MessageId int
+	ChatId    int64
+	IsPrivate bool
 }
 
 type PostEntity struct {

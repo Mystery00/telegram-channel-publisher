@@ -2,6 +2,7 @@ package bot
 
 import (
 	"telegram-channel-publisher/config"
+	"time"
 
 	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/sirupsen/logrus"
@@ -41,4 +42,17 @@ func ReceiveMessage() <-chan tgbot.Update {
 		}
 	}()
 	return result
+}
+
+func DeleteMessage(chatId int64, messageId int, delayTime int) {
+	time.Sleep(time.Duration(delayTime) * time.Second)
+	if resp, err := bot.Request(tgbot.NewDeleteMessage(chatId, messageId)); err != nil || !resp.Ok {
+		logrus.Warnf("Error delete message, resp: %s, err: %v", string(resp.Result), err)
+	}
+}
+
+func Reply(chatId int64, messageId int, text string) (tgbot.Message, error) {
+	msg := tgbot.NewMessage(chatId, text)
+	msg.ReplyToMessageID = messageId
+	return bot.Send(msg)
 }

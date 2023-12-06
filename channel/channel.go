@@ -56,7 +56,7 @@ func HandleUpdate(inCh <-chan tgbot.Update) {
 						continue
 					}
 				}
-				handleMessage(ch.ChannelPost)
+				handleMessage(ch.ChannelPost, false)
 			} else if ch.Message != nil && ch.Message.Chat.IsPrivate() {
 				//私聊消息
 				logrus.Debugf("receive private message from: %d", ch.Message.Chat.ID)
@@ -68,13 +68,13 @@ func HandleUpdate(inCh <-chan tgbot.Update) {
 					logrus.Debugf("not private sender [%d] message, skip", privateSender)
 					continue
 				}
-				handleMessage(ch.Message)
+				handleMessage(ch.Message, true)
 			}
 		}
 	}()
 }
 
-func handleMessage(msg *tgbot.Message) {
+func handleMessage(msg *tgbot.Message, isPrivate bool) {
 	post := model.Post{}
 	if msg.Animation != nil {
 		//GIF
@@ -123,5 +123,8 @@ func handleMessage(msg *tgbot.Message) {
 	}
 	//替换地址
 	bot.ReplaceApiEndpoint(&post)
+	//设置消息ID
+	post.MessageId = msg.MessageID
+	post.ChatId = msg.Chat.ID
 	go publisher.Pub(post)
 }

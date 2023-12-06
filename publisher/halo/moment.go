@@ -50,7 +50,7 @@ func NewMoment(m Moment) {
 	logrus.Debugf("publish moment: %s", string(b))
 	_, err = request("apis/api.plugin.halo.run/v1alpha1/plugins/PluginMoments/moments", http.MethodPost, b)
 	if err != nil {
-		logrus.Errorf("publish error: %v", err)
+		panic(fmt.Errorf("publish moment error: %v", err))
 	}
 	logrus.Infof("publish moment success")
 }

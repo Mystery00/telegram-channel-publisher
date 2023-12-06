@@ -10,12 +10,16 @@ const (
 	ApiEndpoint = "bot.endpoint"
 	MediaDelay  = "bot.media.delay"
 
-	ChannelEnable = "bot.channel.enable"
-	ChannelId     = "bot.channel.id"
-	ChannelFilter = "bot.channel.filter"
+	ChannelEnable      = "bot.channel.enable"
+	ChannelId          = "bot.channel.id"
+	ChannelFilter      = "bot.channel.filter"
+	ChannelReplyEnable = "bot.channel.reply.enable"
+	ChannelReplyDelay  = "bot.channel.reply.delay"
 
-	PrivateEnable = "bot.private.enable"
-	PrivateSender = "bot.private.sender"
+	PrivateEnable      = "bot.private.enable"
+	PrivateSender      = "bot.private.sender"
+	PrivateReplyEnable = "bot.private.reply.enable"
+	PrivateReplyDelay  = "bot.private.reply.delay"
 )
 
 const (
